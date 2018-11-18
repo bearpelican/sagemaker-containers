@@ -153,8 +153,8 @@ def download_and_install(uri, name=DEFAULT_MODULE_NAME, cache=True):
     should_use_cache = cache and exists(name)
 
     if not should_use_cache:
-        with _files.tmpdir() as tmpdir:
-            if uri.startswith('s3://'):
+        if uri.startswith('s3://'):
+            with _files.tmpdir() as tmpdir:
                 dst = os.path.join(tmpdir, 'tar_file')
                 s3_download(uri, dst)
                 module_path = os.path.join(tmpdir, 'module_dir')
@@ -162,13 +162,12 @@ def download_and_install(uri, name=DEFAULT_MODULE_NAME, cache=True):
 
                 with tarfile.open(name=dst, mode='r:gz') as t:
                     t.extractall(path=module_path)
+        else:
+            module_path = uri.replace('file://', '')
 
-            else:
-                module_path = uri
+        prepare(module_path, name)
 
-            prepare(module_path, name)
-
-            install(module_path)
+        install(module_path)
 
 
 def run(module_name, args=None, env_vars=None, wait=True):  # type: (str, list, dict, bool) -> Popen
