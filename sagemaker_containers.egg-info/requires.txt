@@ -1,0 +1,16 @@
+boto3
+six
+pip
+flask
+gunicorn
+gevent
+werkzeug
+
+[test]
+tox
+flake8
+pytest
+pytest-cov
+mock
+sagemaker
+numpy
