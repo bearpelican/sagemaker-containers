@@ -9,19 +9,19 @@ def read(file_name):
 
 
 packages = find_packages(where='src', exclude=('test',))
-packages.append('sagemaker_containers.etc')
+packages.append('sagemaker_containers_test.etc')
 
 setup(
-    name='sagemaker_containers',
+    name='sagemaker_containers_test',
     version='2.3.5',
     description='Open source library for creating containers to run on Amazon SageMaker.',
 
     packages=packages,
     package_dir={
-        'sagemaker_containers': 'src/sagemaker_containers',
-        'sagemaker_containers.etc': 'etc'
+        'sagemaker_containers_test': 'src/sagemaker_containers_test',
+        'sagemaker_containers_test.etc': 'etc'
     },
-    package_data={'sagemaker_containers.etc': ['*']},
+    package_data={'sagemaker_containers_test.etc': ['*']},
     py_modules=[os.path.splitext(os.path.basename(path))[0] for path in glob('src/*.py')],
     long_description=read('README.md'),
     author='Amazon Web Services',
@@ -44,7 +44,7 @@ setup(
     },
 
     entry_points={
-          'console_scripts': ['serve=sagemaker_containers.cli.serve:main',
-                              'train=sagemaker_containers.cli.train:main'],
+          'console_scripts': ['serve=sagemaker_containers_test.cli.serve:main',
+                              'train=sagemaker_containers_test.cli.train:main'],
     }
 )

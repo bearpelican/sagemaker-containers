@@ -1,0 +1,4 @@
+[console_scripts]
+serve = sagemaker_containers_test.cli.serve:main
+train = sagemaker_containers_test.cli.train:main
+
